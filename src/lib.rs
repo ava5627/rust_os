@@ -4,7 +4,6 @@
 #![feature(abi_x86_interrupt)]
 #![test_runner(crate::test_runner)]
 #![reexport_test_harness_main = "test_main"]
-#![feature(const_mut_refs)]
 
 extern crate alloc;
 
@@ -28,14 +27,14 @@ pub fn init() {
 }
 
 pub trait Testable {
-    fn run(&self) -> ();
+    fn run(&self);
 }
 
 impl<T> Testable for T
 where
     T: Fn(),
 {
-    fn run(&self) -> () {
+    fn run(&self) {
         serial_print!("{}... ", core::any::type_name::<T>());
         self();
         serial_println!("[ok]");

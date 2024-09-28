@@ -7,3 +7,10 @@ build-std = ["core", "compiler_builtins", "alloc"]
 
 [target.'cfg(target_os = "none")']
 runner = "bootimage runner"
+
+[target.'cfg(all())']
+rustflags = [
+  "-Aclippy::empty_loop",
+  "-Aclippy::missing_safety_doc",
+  "-Aclippy::new_without_default",
+]
